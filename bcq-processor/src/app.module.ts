@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
@@ -9,15 +9,15 @@ import { AppService } from './app.service';
     ConfigModule.forRoot(),
     ClientsModule.register([
       {
-        name: 'BCQ_SERVICE',
+        name: 'BCQ_processor_SERVICE',
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'bcq-front-end',
+            clientId: 'bcq-processor',
             brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'bcq-front-end',
+            groupId: 'bcq-processor-consumer',
           },
         },
       },

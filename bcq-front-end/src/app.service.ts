@@ -5,9 +5,9 @@ import { selectCryptoDto } from './dto/crypto.select.dto';
 @Injectable()
 export class AppService {
   constructor(
-    @Inject('AUTH_SERVICE') private readonly kafkaService: ClientKafka,
+    @Inject('BCQ_SERVICE') private readonly kafkaService: ClientKafka,
   ) {}
-  async selectCrypto(crypto: selectCryptoDto) {
-    this.kafkaService.emit('selectCrypto', crypto);
+  async selectCrypto(data: selectCryptoDto) {
+    this.kafkaService.emit('selectCrypto', data.crypto);
   }
 }

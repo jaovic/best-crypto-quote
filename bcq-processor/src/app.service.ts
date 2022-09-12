@@ -1,13 +1,29 @@
+import { PuppeteerService } from './puppeteer/puppeteer.service';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { selectCryptoDto } from './dto/crypto.select.dto';
 
 @Injectable()
 export class AppService {
   constructor(
-    @Inject('AUTH_SERVICE') private readonly kafkaService: ClientKafka,
+    @Inject('BCQ_SERVICE') private readonly kafkaService: ClientKafka,
+    private readonly puppeteerService: PuppeteerService,
   ) {}
-  async selectCrypto(crypto: selectCryptoDto) {
-    console.log(crypto);
+  async selectCrypto(crypto: string) {
+    switch (crypto) {
+      case 'Bitcoin':
+        console.log('Bitcoin selecionado');
+        await this.puppeteerService.bitcoin(crypto);
+        break;
+      case 'Ethereum':
+        console.log('Ethereum selecionado');
+        await this.puppeteerService.ethereum(crypto);
+        break;
+      case 'BNB':
+        console.log('BNB selecionado');
+        await this.puppeteerService.bnb(crypto);
+        break;
+      default:
+        console.log(`Sorry, we are out of ${crypto}.`);
+    }
   }
 }

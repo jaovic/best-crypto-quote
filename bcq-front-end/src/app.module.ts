@@ -13,11 +13,11 @@ import { AppService } from './app.service';
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'bcq-front-end',
+            clientId: 'bcq_service',
             brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'bcq-front-end',
+            groupId: 'bcq_service',
           },
         },
       },

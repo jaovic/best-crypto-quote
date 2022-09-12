@@ -7,8 +7,8 @@ import { EventPattern, Payload } from '@nestjs/microservices';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @EventPattern('selectcrypto')
+  @EventPattern('selectCrypto')
   selectCrypto(@Payload() message: selectCryptoDto) {
-    return this.appService.selectCrypto(message);
+    return this.appService.selectCrypto(message.toString());
   }
 }
